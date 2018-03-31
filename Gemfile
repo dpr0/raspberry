@@ -18,7 +18,11 @@ gem 'dotenv-rails'
 gem 'jquery-rails'
 gem 'slim-rails'
 gem 'whenever'
+gem 'chartkick', github: 'ankane/chartkick'
 gem 'rpi_gpio', github: 'ClockVapor/rpi_gpio'
+gem 'therubyracer'
+gem 'less-rails'
+gem 'twitter-bootstrap-rails'
 
 group :development do
   gem 'byebug'

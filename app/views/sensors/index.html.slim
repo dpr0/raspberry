@@ -1,19 +1,11 @@
-h1 Listing sensors
+.container
+  .row
+    .col-xs-3
+      h2 KRSZ.RU
+      = link_to 'check', sensors_path, method: :post
+      img src="gpio.png" height="500"
+    .col-xs-9
+      = line_chart @sensors.pluck(:created_at, :co2)
+      = line_chart @sensors.pluck(:created_at, :temp)
 
-table
-  thead
-    tr
-      th
-      th
-      th
-      th
-      th
-
-  tbody
-    - @sensors.each do |sensor|
-      tr
-        td = link_to sensor.co2, sensor
-        td = sensor.temp
-        td = sensor.crc
-        td = link_to 'Edit', edit_sensor_path(sensor)
-        td = link_to 'Destroy', sensor, data: { confirm: 'Are you sure?' }, method: :delete
+      

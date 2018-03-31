@@ -1,34 +1,30 @@
 class SensorsController < ApplicationController
-  before_action :set_sensor, only: [:show, :edit, :update, :destroy]
+  before_action :set_sensor, only: [:edit, :update, :destroy]
 
   def index
-    @sensors = Sensor.all
-  end
-
-  def show
+    @sensors = Sensor.where(crc: true)
   end
 
   def edit
   end
 
+  def create
+    Sensor.check
+    redirect_to :index
+  end
+
   def update
-    respond_to do |format|
-      if @sensor.update(sensor_params)
-        format.html { redirect_to @sensor, notice: 'Sensor was successfully updated.' }
-        format.json { render :show, status: :ok, location: @sensor }
-      else
-        format.html { render :edit }
-        format.json { render json: @sensor.errors, status: :unprocessable_entity }
-      end
-    end
+    @sensor.update(sensor_params)
+    redirect_to :index
   end
 
   def destroy
     @sensor.destroy
-    respond_to do |format|
-      format.html { redirect_to sensors_url, notice: 'Sensor was successfully destroyed.' }
-      format.json { head :no_content }
-    end
+    redirect_to :index
+  end
+
+  def set
+
   end
 
   private
