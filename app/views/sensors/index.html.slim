@@ -1,0 +1,19 @@
+h1 Listing sensors
+
+table
+  thead
+    tr
+      th
+      th
+      th
+      th
+      th
+
+  tbody
+    - @sensors.each do |sensor|
+      tr
+        td = link_to sensor.co2, sensor
+        td = sensor.temp
+        td = sensor.crc
+        td = link_to 'Edit', edit_sensor_path(sensor)
+        td = link_to 'Destroy', sensor, data: { confirm: 'Are you sure?' }, method: :delete

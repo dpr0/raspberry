@@ -14,14 +14,14 @@ gem 'coffee-rails', '~> 4.2'
 gem 'turbolinks', '~> 5'
 gem 'jbuilder', '~> 2.5'
 gem 'uart'
-
-group :development, :test do
-  gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
-  gem 'capybara', '~> 2.13'
-  gem 'selenium-webdriver'
-end
+gem 'dotenv-rails'
+gem 'jquery-rails'
+gem 'slim-rails'
+gem 'whenever'
+gem 'rpi_gpio', github: 'ClockVapor/rpi_gpio'
 
 group :development do
+  gem 'byebug'
   gem 'web-console', '>= 3.3.0'
   gem 'listen', '>= 3.0.5', '< 3.2'
   gem 'spring'
