@@ -19,8 +19,6 @@ gem 'jquery-rails'
 gem 'slim-rails'
 gem 'whenever'
 # gem 'rpi_gpio', github: 'ClockVapor/rpi_gpio'
-gem 'therubyracer'
-gem 'less-rails'
 gem 'twitter-bootstrap-rails'
 
 group :development do
