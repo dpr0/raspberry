@@ -3,9 +3,7 @@
     .col-xs-3
       h2 KRSZ.RU
       = link_to 'check', sensors_path, method: :post
-      img src="gpio.png" height="500"
+      = image_tag('gpio.png', height: 400)
     .col-xs-9
-      = line_chart @sensors.pluck(:created_at, :co2)
-      = line_chart @sensors.pluck(:created_at, :temp)
-
-      
+      = line_chart @co2
+      = line_chart @temp

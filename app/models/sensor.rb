@@ -8,7 +8,8 @@ class Sensor < ApplicationRecord
 
   def self.check
     a = send_command(CHECK_CO2)
-    self.create(temp: (a[4] - 40), co2: (a[2] * 256 + a[3]), crc: ((256 - a[1..7].reduce(&:+)%256) == a[8]) )
+    crc = 256 - a[1..7].reduce(&:+)%256
+    create(temp: (a[4] - 40), co2: (a[2] * 256 + a[3]), crc: crc ) if crc == a[8]
   end
 
   def self.calibarte
