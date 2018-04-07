@@ -1,9 +1,8 @@
 .container
   .row
-    .col-xs-3
+    .col-xs-4
       h2 KRSZ.RU
       = link_to 'check', sensors_path, method: :post
-      = image_tag('gpio.png', height: 400)
-    .col-xs-9
-      = line_chart @co2
-      = line_chart @temp
+      = image_tag('gpio.png', height: 500)
+    .col-xs-8
+      = @sensor
