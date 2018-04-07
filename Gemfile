@@ -18,7 +18,7 @@ gem 'dotenv-rails'
 gem 'jquery-rails'
 gem 'slim-rails'
 gem 'whenever'
-# gem 'rpi_gpio', github: 'ClockVapor/rpi_gpio'
+gem 'rpi_gpio', github: 'ClockVapor/rpi_gpio'
 gem 'twitter-bootstrap-rails'
 
 group :development do

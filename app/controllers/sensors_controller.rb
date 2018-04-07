@@ -1,9 +1,9 @@
 class SensorsController < ApplicationController
   def index
     @sensor = Sensor.check
-  end
-
-  def create
-    render json: Sensor.check
+    respond_to do |format|
+      format.html
+      format.json { render json: @sensor }
+    end
   end
 end
