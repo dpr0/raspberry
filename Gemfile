@@ -5,6 +5,7 @@ git_source(:github) do |repo_name|
   "https://github.com/#{repo_name}.git"
 end
 
+gem 'dotenv-rails'
 gem 'rails', '~> 5.1.6'
 gem 'sqlite3'
 gem 'puma', '~> 3.7'
@@ -13,13 +14,16 @@ gem 'uglifier', '>= 1.3.0'
 gem 'coffee-rails', '~> 4.2'
 gem 'turbolinks', '~> 5'
 gem 'jbuilder', '~> 2.5'
-gem 'uart'
-gem 'dotenv-rails'
 gem 'jquery-rails'
 gem 'slim-rails'
 gem 'whenever'
-gem 'rpi_gpio', github: 'ClockVapor/rpi_gpio'
 gem 'twitter-bootstrap-rails'
+gem 'uart'
+if ENV['RPI'] == 1
+  gem 'rpi_gpio', github: 'ClockVapor/rpi_gpio'
+  gem 'spi'
+  gem 'i2c'
+end
 
 group :development do
   gem 'byebug'
@@ -28,4 +32,3 @@ group :development do
   gem 'spring'
   gem 'spring-watcher-listen', '~> 2.0.0'
 end
-
