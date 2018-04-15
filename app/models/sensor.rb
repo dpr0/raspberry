@@ -7,7 +7,7 @@ class Sensor < ApplicationRecord
     { temp: (a[4] - 40), co2: (a[2] * 256 + a[3]), crc: (256 - a[1..7].reduce(&:+)%256) == a[8] }
   end
 
-  def self.calibarte
+  def self.calibrate
     send_command("\xFF\x01\x87\x00\x00\x00\x00\x00\x78")
   end
 

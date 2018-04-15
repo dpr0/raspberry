@@ -19,7 +19,7 @@ gem 'slim-rails'
 gem 'whenever'
 gem 'twitter-bootstrap-rails'
 gem 'uart'
-if ENV['RPI'] == 1
+if ENV['RPI'] == '1'
   gem 'rpi_gpio', github: 'ClockVapor/rpi_gpio'
   gem 'spi'
   gem 'i2c'
