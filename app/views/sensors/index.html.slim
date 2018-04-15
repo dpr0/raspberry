@@ -1,15 +1,17 @@
+h2.text-center KRSZ.RU
 .container
   .row
     .col-xs-6
-      h2 UART MH-Z19B
+      p UART MH-Z19B
       - if @sensor.present? && @sensor[:crc]
         ul
-          li= @sensor[:temp]
-          li= @sensor[:co2]
+          li
+            b Температура:
+            = @sensor[:temp]
+          li
+            b CO2:
+            = @sensor[:co2]
     .col-xs-2
-      br
-      br
-      br
       br
       br
       br
@@ -36,5 +38,4 @@
                   = check_box_tag "gpio_pins[]", pin[1][:num], check_pin?(pin[1][:num])
         br= submit_tag 'SET GPIO', class: 'btn btn-xm btn-success'
     .col-xs-4
-      h2 KRSZ.RU
       = image_tag('gpio.png', height: 580)
