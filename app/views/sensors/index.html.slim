@@ -2,10 +2,10 @@
   .row
     .col-xs-6
       h2 UART MH-Z19B
-      - if @sensor.present? && @sensor.crc
+      - if @sensor.present? && @sensor[:crc]
         ul
-          li= @sensor.temp
-          li= @sensor.co2
+          li= @sensor[:temp]
+          li= @sensor[:co2]
     .col-xs-2
       br
       br
