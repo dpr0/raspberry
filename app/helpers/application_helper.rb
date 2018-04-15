@@ -1,5 +1,7 @@
 module ApplicationHelper
   def check_pin?(pin)
-    RPi::GPIO.high?(pin[:num]) if ENV['RPI'] == '1' && pin[:num].is_a?(Integer)
+    return if ENV['RPI'] == '0' && pin.is_a?(String)
+    RPi::GPIO.setup pin, as: :input
+    RPi::GPIO.high?(pin)
   end
 end

@@ -20,7 +20,7 @@
             tr
               td align="center" bgcolor="#{pin[0][:color]}"
                 - if pin[0][:num].is_a?(Integer)
-                  = check_box_tag "gpio_pins[]", pin[0][:num], check_pin?(pin[0])
+                  = check_box_tag "gpio_pins[]", pin[0][:num], check_pin?(pin[0][:num])
               td align="center" bgcolor="#{pin[0][:color]}"
                 - if pin[0][:num] == 'GND'
                   font color="white"= pin[0][:num]
@@ -33,7 +33,7 @@
                   font color="#{'red' if check_pin?(pin[1])}"= pin[1][:num]
               td align="center" bgcolor="#{pin[1][:color]}"
                 - if pin[1][:num].is_a?(Integer)
-                  = check_box_tag "gpio_pins[]", pin[1][:num], check_pin?(pin[1])
+                  = check_box_tag "gpio_pins[]", pin[1][:num], check_pin?(pin[1][:num])
         br= submit_tag 'SET GPIO', class: 'btn btn-xm btn-success'
     .col-xs-4
       h2 KRSZ.RU

@@ -12,9 +12,11 @@ class SensorsController < ApplicationController
     pins = Gpio::GPIO.flatten.map { |x| x[:num] if x[:num].is_a?(Integer) }.compact.sort
     set_pins = params[:gpio_pins].map(&:to_i).sort
     pins.each do |pin|
-      RPi::GPIO.setup(pin, as: :output) if (set_pins.include?(pin) && RPi::GPIO.low?(pin)) || (!set_pins.include?(pin) && RPi::GPIO.high?(pin))
-      RPi::GPIO.set_high(pin) if set_pins.include?(pin) && RPi::GPIO.low?(pin)
-      RPi::GPIO.set_low(pin) if !set_pins.include?(pin) && RPi::GPIO.high?(pin)
+      RPi::GPIO.setup(pin, as: :input)
+      state = RPi::GPIO.high?(pin)
+      RPi::GPIO.setup(pin, as: :output) if (set_pins.include?(pin) && !state) || (!set_pins.include?(pin) && state)
+      RPi::GPIO.set_high(pin) if set_pins.include?(pin) && !state
+      RPi::GPIO.set_low(pin) if !set_pins.include?(pin) && state
     end
   end
 end
