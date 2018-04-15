@@ -11,8 +11,7 @@ class SensorsController < ApplicationController
     return if ENV['RPI'] == '0'
     pins = Gpio::GPIO.flatten.map { |x| x[:num] if x[:num].is_a?(Integer) && x[:color] == '#24AF54' }.compact.sort
     set_pins = params[:gpio_pins].map(&:to_i).sort
-    puts pins
-    puts set_pins
+    p pins
     pins.each do |pin|
       RPi::GPIO.setup(pin, as: :input)
       state = RPi::GPIO.high?(pin)
