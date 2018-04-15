@@ -19,21 +19,21 @@
           - Gpio::GPIO.each do |pin|
             tr
               td align="center" bgcolor="#{pin[0][:color]}"
-                - if pin[0][:num].is_a?(Integer)
-                  = check_box_tag "gpio_pins[]", pin[0][:num], check_pin?(pin[0][:num]), disabled: pin[0][:color] != '#24AF54'
+                - if pin[0][:num].is_a?(Integer) && pin[0][:color] == '#24AF54'
+                  = check_box_tag "gpio_pins[]", pin[0][:num], check_pin?(pin[0][:num])
               td align="center" bgcolor="#{pin[0][:color]}"
                 - if pin[0][:num] == 'GND'
                   font color="white"= pin[0][:num]
                 - else
-                  font color="#{'red' if check_pin?(pin[0][:num])}"= pin[0][:num]
+                  font color="#{'red' if pin[0][:color] == '#24AF54' && check_pin?(pin[0][:num])}"= pin[0][:num]
               td align="center" bgcolor="#{pin[1][:color]}"
                 - if pin[1][:num] == 'GND'
                   font color="white"= pin[1][:num]
                 - else
-                  font color="#{'red' if check_pin?(pin[1][:num])}"= pin[1][:num]
+                  font color="#{'red' if pin[1][:color] == '#24AF54' && check_pin?(pin[1][:num])}"= pin[1][:num]
               td align="center" bgcolor="#{pin[1][:color]}"
-                - if pin[1][:num].is_a?(Integer)
-                  = check_box_tag "gpio_pins[]", pin[1][:num], check_pin?(pin[1][:num]), disabled: pin[1][:color] != '#24AF54'
+                - if pin[1][:num].is_a?(Integer) && pin[1][:color] == '#24AF54'
+                  = check_box_tag "gpio_pins[]", pin[1][:num], check_pin?(pin[1][:num])
         br= submit_tag 'SET GPIO', class: 'btn btn-xm btn-success'
     .col-xs-4
       h2 KRSZ.RU
