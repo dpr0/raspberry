@@ -19,9 +19,11 @@ gem 'slim-rails'
 gem 'whenever'
 gem 'twitter-bootstrap-rails'
 gem 'uart'
-  gem 'rpi_gpio', github: 'ClockVapor/rpi_gpio'
-  gem 'spi'
-  gem 'i2c'
+gem 'rpi_gpio', github: 'ClockVapor/rpi_gpio' if ENV['RPI'] == '1'
+gem 'spi'
+gem 'i2c'
+gem 'rtsp'
+gem 'unicorn'
 
 group :development do
   gem 'byebug'
@@ -29,4 +31,11 @@ group :development do
   gem 'listen', '>= 3.0.5', '< 3.2'
   gem 'spring'
   gem 'spring-watcher-listen', '~> 2.0.0'
+  gem 'capistrano',          require: false
+  gem 'capistrano-bundler',  require: false
+  gem 'capistrano-rails',    require: false
+  gem 'capistrano-rvm',      require: false
+  gem 'capistrano-sidekiq',  require: false
+  gem 'capistrano3-unicorn', require: false
+  gem 'capistrano-local-precompile', '~> 1.1.1', require: false
 end

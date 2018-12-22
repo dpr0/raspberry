@@ -1,13 +1,13 @@
 h2.text-center KRSZ.RU
 .container
   .row
-    .col-xs-6
+    .col-xs-7
       p UART MH-Z19B
       - if @sensor.present? && @sensor[:crc]
         ul
           li Температура: #{@sensor[:temp]}
           li CO2: #{@sensor[:co2]}
-    .col-xs-2
+    .col-xs-1
       br
       br
       br
