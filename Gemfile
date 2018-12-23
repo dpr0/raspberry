@@ -19,7 +19,7 @@ gem 'slim-rails'
 gem 'whenever'
 gem 'twitter-bootstrap-rails'
 gem 'uart'
-gem 'rpi_gpio', github: 'ClockVapor/rpi_gpio' if ENV['RPI'] == '1'
+gem 'rpi_gpio', github: 'ClockVapor/rpi_gpio'
 gem 'spi'
 gem 'i2c'
 gem 'rtsp'
@@ -35,7 +35,6 @@ group :development do
   gem 'capistrano-bundler',  require: false
   gem 'capistrano-rails',    require: false
   gem 'capistrano-rvm',      require: false
-  gem 'capistrano-sidekiq',  require: false
   gem 'capistrano3-unicorn', require: false
   gem 'capistrano-local-precompile', '~> 1.1.1', require: false
 end

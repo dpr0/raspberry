@@ -12,18 +12,9 @@ server '192.168.1.20', user: 'pi', roles: %w{app db web}, primary: true
 
 # role-based syntax
 # ==================
-
-# Defines a role with one or multiple servers. The primary server in each
-# group is considered to be the first unless any  hosts have the primary
-# property set. Specify the username and a domain or IP for the server.
-# Don't use `:all`, it's a meta role.
-
-role :app, %w{deploy@192.168.1.20}
-role :web, %w{deploy@192.168.1.20}
-role :db,  %w{deploy@192.168.1.20}
-# role :app, %w{deploy@krsz.ru}
-# role :web, %w{deploy@krsz.ru}
-# role :db,  %w{deploy@krsz.ru}
+role :app, %w{pi@192.168.1.20}
+role :web, %w{pi@192.168.1.20}
+role :db,  %w{pi@192.168.1.20}
 
 set :rails_env, :production
 set :stage, :production
