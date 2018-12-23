@@ -61,9 +61,6 @@ GEM
     capistrano-rvm (0.1.2)
       capistrano (~> 3.0)
       sshkit (~> 1.2)
-    capistrano-sidekiq (1.0.2)
-      capistrano (>= 3.9.0)
-      sidekiq (>= 3.4)
     capistrano3-unicorn (0.2.1)
       capistrano (~> 3.1, >= 3.1.0)
     chronic (0.10.2)
@@ -76,7 +73,6 @@ GEM
     coffee-script-source (1.12.2)
     commonjs (0.2.7)
     concurrent-ruby (1.1.4)
-    connection_pool (2.2.2)
     crass (1.0.4)
     dotenv (2.5.0)
     dotenv-rails (2.5.0)
@@ -129,8 +125,6 @@ GEM
     parslet (1.8.2)
     puma (3.12.0)
     rack (2.0.6)
-    rack-protection (2.0.5)
-      rack
     rack-test (1.1.0)
       rack (>= 1.0, < 3)
     rails (5.1.6.1)
@@ -161,7 +155,6 @@ GEM
     rb-fsevent (0.10.3)
     rb-inotify (0.10.0)
       ffi (~> 1.0)
-    redis (4.1.0)
     rtp (0.1.5)
       bindata (~> 1.4)
       log_switch (>= 0.4.0)
@@ -184,10 +177,6 @@ GEM
       tilt (>= 1.1, < 3)
     sdp (0.2.9)
       parslet (>= 1.1.0)
-    sidekiq (5.2.3)
-      connection_pool (~> 2.2, >= 2.2.2)
-      rack-protection (>= 1.5.0)
-      redis (>= 3.3.5, < 5)
     slim (4.0.1)
       temple (>= 0.7.6, < 0.9)
       tilt (>= 2.0.6, < 2.1)
@@ -254,7 +243,6 @@ DEPENDENCIES
   capistrano-local-precompile (~> 1.1.1)
   capistrano-rails
   capistrano-rvm
-  capistrano-sidekiq
   capistrano3-unicorn
   coffee-rails (~> 4.2)
   dotenv-rails
