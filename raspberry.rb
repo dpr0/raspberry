@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+@@bme280 = I2C::Driver::BME280.new(device: 1)
+
 class Raspberry
   def call(env)
     resp = case env['REQUEST_URI']
@@ -30,8 +32,7 @@ class Raspberry
            when '/mhz19b'
              Mhz19b.check
            when '/bme280'
-             @bme280 ||= I2C::Driver::BME280.new(device: 1)
-             @bme280.all
+             @@bme280.all
            end
 
     [200, {'Content-Type' => 'application/json'}, [JSON.pretty_generate(resp)]]
