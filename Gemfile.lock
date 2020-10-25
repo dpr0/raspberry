@@ -11,6 +11,7 @@ GEM
     spi (0.1.1)
     uart (1.0.0)
       ruby-termios
+    ya_gpio (0.1.0)
 
 PLATFORMS
   ruby
@@ -22,6 +23,7 @@ DEPENDENCIES
   puma
   spi
   uart
+  ya_gpio
 
 BUNDLED WITH
    2.1.4
