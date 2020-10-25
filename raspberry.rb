@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 class Raspberry
+  @bme280 = I2C::Driver::BME280.new(device: 1)
+
   def call(env)
     resp = case env['REQUEST_URI']
            when '/'
@@ -27,8 +29,10 @@ class Raspberry
                 { id: 37, color: '#24AF54', num: a[26] }, { id: 38, color: '#AA37A1', num: a[20] },
                 { id: 39, color: '#000000', num: 'GND' }, { id: 40, color: '#AA37A1', num: a[21] }
              ]
-           when '/sensor'
+           when '/mhz19b'
              Mhz19b.check
+           when '/bme280'
+             @bme280.all
            end
 
     [200, {'Content-Type' => 'application/json'}, [JSON.pretty_generate(resp)]]
