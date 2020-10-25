@@ -7,6 +7,7 @@ require 'byebug'
 require 'json'
 require 'ya_gpio'
 require 'i2c'
+require 'i2c/bme280'
 require_relative 'mhz19b'
 require_relative 'raspberry'
 
