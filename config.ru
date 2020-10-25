@@ -1,3 +1,3 @@
-require_relative 'pin'
+require_relative 'raspberry'
 use Rack::Reloader
-run Sinatra::Application
+run Raspberry.new

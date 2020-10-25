@@ -3,31 +3,12 @@ GEM
   specs:
     byebug (11.1.3)
     dotenv (2.7.6)
-    httparty (0.18.1)
-      mime-types (~> 3.0)
-      multi_xml (>= 0.5.2)
     i2c (0.4.2)
-    mime-types (3.3.1)
-      mime-types-data (~> 3.2015)
-    mime-types-data (3.2020.0512)
-    multi_xml (0.6.0)
-    mustermann (1.1.1)
-      ruby2_keywords (~> 0.0.1)
     nio4r (2.5.4)
     puma (5.0.2)
       nio4r (~> 2.0)
-    rack (2.2.3)
-    rack-protection (2.1.0)
-      rack
     ruby-termios (1.0.2)
-    ruby2_keywords (0.0.2)
-    sinatra (2.1.0)
-      mustermann (~> 1.0)
-      rack (~> 2.2)
-      rack-protection (= 2.1.0)
-      tilt (~> 2.0)
     spi (0.1.1)
-    tilt (2.0.10)
     uart (1.0.0)
       ruby-termios
 
@@ -37,10 +18,8 @@ PLATFORMS
 DEPENDENCIES
   byebug
   dotenv
-  httparty
   i2c
   puma
-  sinatra
   spi
   uart
 
