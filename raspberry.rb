@@ -1,12 +1,10 @@
 # frozen_string_literal: true
 
-@@bme280 = I2C::Driver::BME280.new(device: 1)
-
 class Raspberry
   def call(env)
     resp = case env['REQUEST_URI']
            when '/'
-             a = (0..27).map { |pin| YaGPIO.new(pin, YaGPIO::INPUT).high? }
+             a = (0..27).map { |pin| YaGPIO.new(pin, YaGPIO::OUTPUT).high? }
              [
                 { id:  1, color: '#DAA01D', num: '3v3' }, { id:  2, color: 'red',     num: '5v0' },
                 { id:  3, color: '#4792FF', num: a[2]  }, { id:  4, color: 'red',     num: '5v0' },
@@ -32,7 +30,8 @@ class Raspberry
            when '/mhz19b'
              Mhz19b.check
            when '/bme280'
-             @@bme280.all
+             @bme280 ||= I2C::Driver::BME280.new(device: 1)
+             @bme280.all
            end
 
     [200, {'Content-Type' => 'application/json'}, [JSON.pretty_generate(resp)]]
