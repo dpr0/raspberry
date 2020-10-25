@@ -4,6 +4,7 @@ require 'uart'
 require 'byebug'
 require 'json'
 require 'ya_gpio'
+require 'i2c'
 require_relative 'mhz19b'
 require_relative 'raspberry'
 
