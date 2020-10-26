@@ -31,7 +31,8 @@ class Raspberry
              Mhz19b.check
            when '/bme280'
              @bme280 ||= I2C::Driver::BME280.new(device: 1)
-             @bme280.all
+             x = @bme280.all
+             { t: (x[:t] * 10).to_i / 10.0, p: (x[:p] * 10).to_i / 10.0, h: (x[:h] * 10).to_i / 10.0 }
            end
 
     [200, {'Content-Type' => 'application/json'}, [JSON.pretty_generate(resp)]]
