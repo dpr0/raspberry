@@ -4,8 +4,10 @@ class Raspberry
   def call(env)
     resp = case env['REQUEST_URI']
            when '/'
+             {status: :ok}
+           when '/pins'
              a = (0..27) #.map { |pin| YaGPIO.new(pin, YaGPIO::OUTPUT).high? }
-             [
+             {data: [
                 { id:  1, color: '#DAA01D', num: '3v3' }, { id:  2, color: 'red',     num: '5v0' },
                 { id:  3, color: '#4792FF', num: a[2]  }, { id:  4, color: 'red',     num: '5v0' },
                 { id:  5, color: '#4792FF', num: a[3]  }, { id:  6, color: '#000000', num: 'GND' },
@@ -26,7 +28,7 @@ class Raspberry
                 { id: 35, color: '#AA37A1', num: a[19] }, { id: 36, color: '#24AF54', num: a[16] },
                 { id: 37, color: '#24AF54', num: a[26] }, { id: 38, color: '#AA37A1', num: a[20] },
                 { id: 39, color: '#000000', num: 'GND' }, { id: 40, color: '#AA37A1', num: a[21] }
-             ]
+             ]}
            when '/mhz19b'
              Mhz19b.check
            when '/bme280'
