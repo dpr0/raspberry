@@ -4,7 +4,7 @@ class Raspberry
   def call(env)
     resp = case env['REQUEST_URI']
            when '/'
-             a = (0..27).map { |pin| YaGPIO.new(pin, YaGPIO::OUTPUT).high? }
+             a = (0..27) #.map { |pin| YaGPIO.new(pin, YaGPIO::OUTPUT).high? }
              [
                 { id:  1, color: '#DAA01D', num: '3v3' }, { id:  2, color: 'red',     num: '5v0' },
                 { id:  3, color: '#4792FF', num: a[2]  }, { id:  4, color: 'red',     num: '5v0' },
