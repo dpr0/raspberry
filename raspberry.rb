@@ -2,9 +2,18 @@
 
 class Raspberry
   def call(env)
+    req = Rack::Request.new(env)
+    params = JSON.parse(req.body.read)
+
     resp = case env['REQUEST_URI']
            when '/'
              {status: :ok}
+           when '/pin'
+             if env['REQUEST_METHOD'] == 'POST'
+               pin = YaGPIO.new(params['pin'], YaGPIO::OUTPUT)
+               params['status'] == 'true' ? pin.high : pin.low
+               { pin: params['pin'], status: pin.high? }
+             end
            when '/pins'
              a = (0..27).to_a #.map { |pin| YaGPIO.new(pin, YaGPIO::OUTPUT).high? }
              [
