@@ -4,7 +4,7 @@ class Raspberry
   def call(env)
     req = Rack::Request.new(env)
     params = JSON.parse(req.body.read)
-
+    puts params
     resp = case env['REQUEST_URI']
            when '/'
              {status: :ok}
