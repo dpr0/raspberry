@@ -11,7 +11,7 @@ class Raspberry
            when '/pin'
              if env['REQUEST_METHOD'] == 'POST'
                pin = YaGPIO.new(params['pin'], YaGPIO::OUTPUT)
-               params['status'] == 'true' ? pin.high : pin.low
+               params['status'] ? pin.high : pin.low
                { pin: params['pin'], status: pin.high? }
              end
            when '/pins'
