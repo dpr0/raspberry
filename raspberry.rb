@@ -3,8 +3,7 @@
 class Raspberry
   def call(env)
     req = Rack::Request.new(env)
-    params = JSON.parse(req.body.read)
-    puts params
+    puts req.body.read
     resp = case env['REQUEST_URI']
            when '/'
              {status: :ok}
@@ -25,8 +24,7 @@ class Raspberry
              { t: (x[:t] * 10).to_i / 10.0, p: (x[:p] * 10).to_i / 10.0, h: (x[:h] * 10).to_i / 10.0 }
            end
 
-    #[200, {'Content-Type' => 'application/json'}, [JSON.pretty_generate(resp)]]
-    [200, {'Content-Type' => 'application/json'}, [resp]]
+    [200, {'Content-Type' => 'application/json'}, [JSON.pretty_generate(resp)]]
   end
 end
 
