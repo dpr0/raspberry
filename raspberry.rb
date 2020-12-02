@@ -9,6 +9,7 @@ class Raspberry
              {status: :ok}
            when '/pin'
              if env['REQUEST_METHOD'] == 'POST'
+               params = JSON.parse(req.body.read)
                pin = YaGPIO.new(params['pin'], YaGPIO::OUTPUT)
                params['status'] ? pin.high : pin.low
                { pin: params['pin'], status: pin.high? }
