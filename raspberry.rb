@@ -7,6 +7,8 @@ class Raspberry
     resp = case env['REQUEST_URI']
            when '/'
              {status: :ok}
+           when '/pin17'
+             YaGPIO.new(17, YaGPIO::OUTPUT).high
            when '/pin'
              if env['REQUEST_METHOD'] == 'POST'
                params = JSON.parse(request_params)
