@@ -3,7 +3,6 @@
 # rackup -s puma --host 0.0.0.0 config.ru # default port: 9292
 
 require 'uart'
-require 'byebug'
 require 'json'
 require 'ya_gpio'
 require 'i2c'
