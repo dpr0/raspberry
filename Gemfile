@@ -10,6 +10,7 @@ gem 'spi'
 gem 'ruby-termios'
 gem 'uart'
 gem 'ya_gpio'
+gem 'byebug'
 
 group :development do
   gem 'bcrypt_pbkdf'
@@ -19,6 +20,5 @@ group :development do
   gem 'capistrano-bundler', require: false
   gem 'capistrano-nvm',     require: false
   gem 'capistrano-rvm',     require: false
-  gem 'debug'
   gem 'rubocop'
 end

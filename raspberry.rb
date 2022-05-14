@@ -4,13 +4,13 @@ class Raspberry
   def call(env)
     @request = Rack::Request.new(env)
     request_params = @request.body.read
-    puts request_params
     [200, { 'Content-Type' => 'application/json' }, [JSON.pretty_generate(resp)]]
   end
 
   private
 
   def resp
+    puts path_fragments
     pin = path_fragments[1]
     case path_fragments.first
     when '/'
