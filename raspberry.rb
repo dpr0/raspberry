@@ -3,12 +3,12 @@
 class Raspberry
   def call(env)
     @request = Rack::Request.new(env)
-    @params = JSON.parse(@request.body.read)
+    request_body = @request.body.read
+    @params = JSON.parse(request_body) if request_body.size > 0
     [200, { 'Content-Type' => 'application/json' }, [JSON.pretty_generate(resp)]]
   end
 
   def resp
-    puts path_fragments
     pin = path_fragments[1]
     case path_fragments.first
     when ''
@@ -21,7 +21,7 @@ class Raspberry
       p = pinout(pin)
       { status: p.high? ? p.low : p.high }
     when 'pin'
-      if env['REQUEST_METHOD'] == 'POST'
+      if @request.post?
         p = pinout(@params['pin'] || pin)
         @params['status'] ? p.high : p.low
         { pin: @params['pin'], status: p.high? }
