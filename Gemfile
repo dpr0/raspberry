@@ -6,6 +6,7 @@ gem 'i2c'
 gem 'i2c-bme280'
 gem 'puma', '4.3.10'
 gem 'spi'
+gem 'ruby-termios'
 gem 'uart'
 gem 'ya_gpio'
 
