@@ -2,32 +2,58 @@
 
 class Raspberry
   def call(env)
-    request_params = Rack::Request.new(env).body.read
+    @request = Rack::Request.new(env)
+    request_params = @request.body.read
     puts request_params
-    resp = case env['REQUEST_URI']
-           when '/'
-             {status: :ok}
-           when '/pin17'
-             YaGPIO.new(17, YaGPIO::OUTPUT).high
-           when '/pin'
-             if env['REQUEST_METHOD'] == 'POST'
-               params = JSON.parse(request_params)
-               pin = YaGPIO.new(params['pin'], YaGPIO::OUTPUT)
-               params['status'] ? pin.high : pin.low
-               { pin: params['pin'], status: pin.high? }
-             end
-           when '/pins'
-             a = (0..27).to_a #.map { |pin| YaGPIO.new(pin, YaGPIO::OUTPUT).high? }
+    [200, { 'Content-Type' => 'application/json' }, [JSON.pretty_generate(resp)]]
+  end
 
-           when '/mhz19b'
-             Mhz19b.check
-           when '/bme280'
-             @bme280 ||= I2C::Driver::BME280.new(device: 1)
-             x = @bme280.all
-             { t: (x[:t] * 10).to_i / 10.0, p: (x[:p] * 10).to_i / 10.0, h: (x[:h] * 10).to_i / 10.0 }
-           end
+  private
 
-    [200, {'Content-Type' => 'application/json'}, [JSON.pretty_generate(resp)]]
+  def resp
+    pin = path_fragments[1]
+    case path_fragments.first
+    when '/'
+      { status: :ok }
+    when '/set_pin'
+      pinout(pin).high
+    when '/reset_pin'
+      pinout(pin).low
+    when '/toggle_pin'
+      p = pinout(pin)
+      p.high? ? p.low : p.high
+    when '/pin'
+      if env['REQUEST_METHOD'] == 'POST'
+        params = JSON.parse(request_params)
+        p = pinout(params['pin'] || pin)
+        params['status'] ? p.high : p.low
+        { pin: params['pin'], status: p.high? }
+      else
+        pinout(pin).high?
+      end
+    when '/pins'
+      (0..27).map { |p| [7, 8].include?(p) ? true : pinout(p).high? }
+    when '/mhz19b'
+      Mhz19b.check
+    when '/bme280_2'
+      bme ||= I2C::Driver::BME280.new(device: 1, i2c_address: 119) # 0x77
+      bme ? json(bme.all) : {}
+    when '/bme280'
+      bme ||= I2C::Driver::BME280.new(device: 1) # 0x76
+      bme ? json(bme.all) : {}
+    end
+  end
+
+  def json(x)
+    { t: (x[:t] * 10).to_i / 10.0, p: (x[:p] * 10).to_i / 10.0, h: (x[:h] * 10).to_i / 10.0 }
+  end
+
+  def pinout(pin)
+    YaGPIO.new(pin, YaGPIO::OUTPUT)
+  end
+
+  def path_fragments
+    @path_fragments ||= @request.path.split('/').reject(&:empty?)
   end
 end
 

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Mhz19b
   CHECK     = '\xFF\x01\x86\x00\x00\x00\x00\x00\x79'
   CALIBRATE = '\xFF\x01\x87\x00\x00\x00\x00\x00\x78'
@@ -8,7 +10,8 @@ class Mhz19b
     def check
       a = send_command(CHECK)
       return { temp: nil, co2: nil, crc: false } unless a
-      { temp: (a[4] - 40), co2: (a[2] * 256 + a[3]), crc: (256 - a[1..7].reduce(&:+)%256) == a[8] }
+
+      { temp: (a[4] - 40), co2: (a[2] * 256 + a[3]), crc: (256 - a[1..7].reduce(&:+) % 256) == a[8] }
     end
 
     def calibrate
@@ -26,8 +29,12 @@ class Mhz19b
     private
 
     def send_command(command)
-      UART.open('/dev/ttyAMA0') { |s| s.write(command); s.read(9).unpack('C9')}
+      UART.open('/dev/ttyAMA0') do |s|
+        s.write(command)
+        s.read(9).unpack('C9')
+      end
     rescue Errno::ENOENT
+      # Ignored
     end
   end
 end
