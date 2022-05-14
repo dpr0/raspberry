@@ -3,8 +3,7 @@
 class Raspberry
   def call(env)
     @request = Rack::Request.new(env)
-    request_params = @request.body.read
-    puts request_params
+    @params = JSON.parse(@request.body.read)
     [200, { 'Content-Type' => 'application/json' }, [JSON.pretty_generate(resp)]]
   end
 
@@ -23,10 +22,9 @@ class Raspberry
       { status: p.high? ? p.low : p.high }
     when 'pin'
       if env['REQUEST_METHOD'] == 'POST'
-        params = JSON.parse(request_params)
-        p = pinout(params['pin'] || pin)
-        params['status'] ? p.high : p.low
-        { pin: params['pin'], status: p.high? }
+        p = pinout(@params['pin'] || pin)
+        @params['status'] ? p.high : p.low
+        { pin: @params['pin'], status: p.high? }
       else
         { status: pinout(pin).high? }
       end
