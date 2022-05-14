@@ -2,6 +2,7 @@
 
 source 'https://rubygems.org'
 
+gem 'rack'
 gem 'i2c'
 gem 'i2c-bme280'
 gem 'puma', '4.3.10'
