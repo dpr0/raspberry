@@ -8,7 +8,7 @@ set :rvm_ruby,        '3.0.0'
 set :application,     'raspberry'
 set :repo_url,        'git@github.com:dpr0/raspberry.git'
 set :linked_files,    fetch(:linked_files, []).push()
-set :linked_dirs,     fetch(:linked_dirs, []).push('log', 'tmp/pids', 'tmp/cache', 'tmp/sockets', 'tmp/session_store', 'vendor/bundle', 'public/system', 'public/uploads')
+set :linked_dirs,     fetch(:linked_dirs, []).push()
 set :keep_releases,   5
 set :user,            'pi'
 set :use_sudo,        false
@@ -33,6 +33,12 @@ namespace :deploy do
         puts 'Run `git push` to sync changes.'
         exit
       end
+    end
+  end
+
+  task :start do
+    on roles(:app) do
+      execute "rackup -s puma --host 0.0.0.0 config.ru -D"
     end
   end
 
