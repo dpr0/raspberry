@@ -38,6 +38,7 @@ namespace :deploy do
 
   task :start do
     on roles(:app) do
+      execute "cd raspberry/current"
       execute "rackup -s puma --host 0.0.0.0 config.ru -D"
     end
   end
