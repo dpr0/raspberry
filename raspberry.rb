@@ -4,41 +4,41 @@ class Raspberry
   def call(env)
     @request = Rack::Request.new(env)
     request_params = @request.body.read
+    puts request_params
     [200, { 'Content-Type' => 'application/json' }, [JSON.pretty_generate(resp)]]
   end
-
-  private
 
   def resp
     puts path_fragments
     pin = path_fragments[1]
     case path_fragments.first
-    when '/'
+    when ''
       { status: :ok }
-    when '/set_pin'
-      pinout(pin).high
-    when '/reset_pin'
-      pinout(pin).low
-    when '/toggle_pin'
+    when 'set_pin'
+      byebug
+      { status: pinout(pin).high }
+    when 'reset_pin'
+      { status: pinout(pin).low }
+    when 'toggle_pin'
       p = pinout(pin)
-      p.high? ? p.low : p.high
-    when '/pin'
+      { status: p.high? ? p.low : p.high }
+    when 'pin'
       if env['REQUEST_METHOD'] == 'POST'
         params = JSON.parse(request_params)
         p = pinout(params['pin'] || pin)
         params['status'] ? p.high : p.low
         { pin: params['pin'], status: p.high? }
       else
-        pinout(pin).high?
+        { status: pinout(pin).high? }
       end
-    when '/pins'
+    when 'pins'
       (0..27).map { |p| [7, 8].include?(p) ? true : pinout(p).high? }
-    when '/mhz19b'
+    when 'mhz19b'
       Mhz19b.check
-    when '/bme280_2'
+    when 'bme280_2'
       bme ||= I2C::Driver::BME280.new(device: 1, i2c_address: 119) # 0x77
       bme ? json(bme.all) : {}
-    when '/bme280'
+    when 'bme280'
       bme ||= I2C::Driver::BME280.new(device: 1) # 0x76
       bme ? json(bme.all) : {}
     end
@@ -53,7 +53,7 @@ class Raspberry
   end
 
   def path_fragments
-    @path_fragments ||= @request.path.split('/').reject(&:empty?)
+    @request.path.split('/').reject(&:empty?)
   end
 end
 
