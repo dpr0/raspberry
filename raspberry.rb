@@ -15,7 +15,6 @@ class Raspberry
     when ''
       { status: :ok }
     when 'set_pin'
-      byebug
       { status: pinout(pin).high }
     when 'reset_pin'
       { status: pinout(pin).low }
