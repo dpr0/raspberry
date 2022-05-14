@@ -2,7 +2,7 @@
 
 lock '3.17.0'
 
-server 'krsz.ru', port: 2222, roles: %w[app], primary: true
+server 'krsz.ru', port: 2216, roles: %w[app], primary: true
 
 set :rvm_ruby, '3.0.0'
 set :application,     'raspberry'
@@ -12,12 +12,12 @@ set :linked_dirs,
     fetch(:linked_dirs, []).push('log', 'tmp/pids', 'tmp/cache', 'tmp/sockets', 'tmp/session_store', 'vendor/bundle',
                                  'public/system', 'public/uploads')
 set :keep_releases,   5
-set :user,            'deploy'
+set :user,            'pi'
 set :use_sudo,        false
 set :stage,           :production
 set :deploy_to,       "/home/#{fetch(:user)}/#{fetch(:application)}"
 set :whenever_identifier, -> { "#{fetch(:application)}_#{fetch(:stage)}" }
-set :ruby_string, '$HOME/.rbenv/bin/rbenv exec bundle exec'
+set :ruby_string, "$HOME/.rvm/rubies/ruby-#{rvm_ruby}/bin/ruby exec bundle exec"
 set :ssh_options, {
   user: fetch(:user),
   keys: %w[~/.ssh/id_rsa],
