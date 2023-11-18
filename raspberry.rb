@@ -13,6 +13,10 @@ class Raspberry
     case path_fragments.first
     when ''
       { status: :ok }
+    when 'start'
+      { status: :start }
+    when 'finish'
+      { status: :finish }
     when 'set_pin'
       { status: pinout(pin).high }
     when 'reset_pin'

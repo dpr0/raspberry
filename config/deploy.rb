@@ -2,7 +2,7 @@
 
 lock '3.17.0'
 
-server 'krsz.ru', port: 2216, roles: %w[app], primary: true
+server '46.149.66.130', roles: %w[app], primary: true
 
 set :rvm_ruby,        '3.0.0'
 set :application,     'raspberry'
@@ -21,7 +21,7 @@ set :ssh_options, {
   keys: %w[~/.ssh/id_rsa],
   forward_agent: true,
   auth_methods: %w[publickey password],
-  port: 2216
+  port: 2217
 }
 
 namespace :deploy do
